@@ -8,13 +8,15 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var path = require('path');
- 
+var favicon = require('serve-favicon');
+
 // Pick arbitrary port for server
 var port = 3000;
 app.set('port', (process.env.PORT || port));
 
 // Serve static assets from public/
 app.use(express.static(path.join(__dirname, 'public/')));
+app.use(favicon(__dirname + '/views/favicon.ico'));
 // Serve vue from node_modules as vue/
 app.use('/vue', express.static(path.join(__dirname, '/node_modules/vue/dist/')));
 // Serve index.html directly as root page
@@ -30,7 +32,7 @@ app.get('/dispatcher', function (req, res) {
   res.sendFile(path.join(__dirname, 'views/dispatcher.html'));
 });
 
-// Store data in an object to keep the global namespace clean and 
+// Store data in an object to keep the global namespace clean and
 // prepare for multiple instances of data if necessary
 function Data() {
   this.orders = {};
