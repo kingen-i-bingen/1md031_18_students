@@ -1,0 +1,71 @@
+body {
+    font-family: "Times New Roman";
+    font-size: 1.25em;
+}
+header {
+height: 13.5em;
+overflow:hidden;
+}
+  header img {
+  opacity: 0.7;
+  width: 100%;
+  }
+  header h1 {
+    position: absolute;
+    top: 16%;
+    margin-left: 22%;
+    font-size: 3em;
+  }
+.wrapper {
+     display: grid;
+     grid-gap: 5px;
+     grid-template-columns: repeat(auto-fill,12em);
+     background-color: black;
+     color: white;
+ }
+ .wrapper span {
+ font-weight: bold;
+ }
+
+ .v-bind {
+   margin-left: auto;
+   margin-right: auto;
+ }
+
+ h5 {
+   font-weight: bold;
+   font-size: 1.25em;
+   text-align: center;
+ }
+
+
+ section {
+   border: 1px dashed #404040;
+   padding-left: 2%;
+ }
+
+#BurgerSection {
+  background-color: black;
+  color: white;
+}
+.Ingredients span {
+  font-weight: bold;
+}
+button {
+  padding-bottom: 1em;
+  margin-top: 1em;
+}
+  button img {
+    position: relative;
+    top: 7px;
+  }
+  button:hover {
+    background-color: grey;
+    cursor:pointer;
+  }
+input[type="radio"]:hover {
+  cursor:pointer;
+}
+#orders p {
+  color:white;
+}
