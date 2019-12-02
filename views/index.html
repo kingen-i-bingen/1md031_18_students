@@ -1,9 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>DELI-VERY</title>
+        <title>Cliff Barnes</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" href="css/deli-very.css">
+
+        <script src="js/js_script.js" defer></script>
+        <script type="text/javascript" src="js/menu.js" defer></script>
+        <script src="https://vuejs.org/js/vue.js"></script>
+        <script src="/socket.io/socket.io.js" defer></script>
+        <script src="/vue/vue.js" defer></script>
+        <script src="js/vue_script.js" defer></script>
+
     </head>
     <body>
-        <h1>Hello World!!!</h1>
+      <main id="menuBurger">
+        <header>
+            <img src="img/cliff-barnes.jpg">
+              <h1>Välkommen till Cliff Barnes</h1>
+        </header>
+        <section id="BurgerSection">
+            <h2> Välj burgare </h2>
+              <p> Här kan du välja mellan alla våra fantastiska burgare </p>
+            <div class="wrapper">
+                <div v-for="burger in burgers">
+                  <h5> {{burger.name}} </h5>
+                  <img v-bind:src='burger.pic' width="225" height="187">
+                    <ul>
+                      <li>{{burger.kCal}} kCal</li>
+                      <li v-if="burger.lactose"> Contains <span class="Ingredients"> lactose </span></li>
+                      <li v-if="burger.gluten"> Contains <span class="Ingredients"> gluten </span></li>
+                    </ul>
+                    Lägg till:
+                  <input type="checkbox" id="checkbox" v-model="chosen" v-bind:value="burger.name">
+                </div>
+             </div>
+          </section>
+          <section id="Contact">
+            <h3>Kundinforamtion</h3>
+              <p> Fyll i nedanstående fält </p>
+              <h4> Leveransinformation </h4>
+              <form>
+                <p>
+                  <label for="name">Full name</label><br>
+                  <input type="text" id="name" name="fn" required="required" v-model="name" placeholder="First- and last name">
+                </p>
+                <p>
+                  <label for="email">E-mail</label><br>
+                  <input type="email" id="email" name="em" required="required" v-model="email" placeholder="E-mail address">
+                </p>
+                <p>
+                  <label for="recipient">Betalmetod</label><br>
+                  <select id="recipient" name="rcp" v-model="payment">
+                    <option> Kreditkort </option>
+                    <option>Faktura</option>
+                    <option>Vid levernas</option>
+                    <option>Klarna 14 dagar</option>
+                  </select>
+                </p>
+                <p>
+                  <label for="kön">Kön</label><br>
+                  <input type="radio" name="gender" v-model="picked" value="Man"> Man<br>
+                  <input type="radio" name="gender" v-model="picked" value="Kvinna"> Kvinna <br>
+                  <input type="radio" name="gender" v-model="picked" value="Ickebinär"> Icke-binär <br>
+                  <input type="radio" name="gender" v-model="picked" value="Vill ej uppge"> Vill ej uppge <br>
+                </p>
+                <p> Var god markera leveransplats: </p>
+                    <div class="view-box">
+                      <div id="dots" v-on:click="displayOrder">
+                        <div v-bind:style="{ left: details.x + 'px', top: details.y + 'px'}">
+                        T
+                        </div>
+                      </div>
+                    </div>
+              </form>
+          </section>
+          <section>
+                <button type="submit" v-on:click="addOrder"> Beställ <img src="img/pil.png" width ="30"></button>
+              <div id="orders" style="display:none;">
+                  <h3 class="orderHeader">Orderbekräftelse </h3>
+                  <h4> Beställning: </h4>
+                  <div v-for="burger in chosen"> - {{burger}}</div>
+                  <h4> Kundinforamtion: </h4>
+                  Name: {{name}} <br>
+                  E-mail: {{email}} <br>
+                  Payment method: {{payment}} <br>
+                  Gender: {{picked}} <br>
+                  <p>"" </p>
+                </div>
+
+          </section>
+          <hr>
+      </main>
+      <footer>
+       <p> © Cliff Barnes AB Kontakt: vilhelm.soderstrom@gmail.com</p>
+      </footer>
     </body>
 </html>
